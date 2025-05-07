@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <canEscalate>false</canEscalate>
+    <description>Use this topic when a customer inquires about the refund policy after canceling an order.</description>
+    <developerName>p_16jgL000000IiQn_Refund_Policy_Overview</developerName>
+    <genAiFunctions>
+        <functionName>EmployeeCopilot__AnswerQuestionsWithKnowledge</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>If the customer asks about the refund policy, use EmployeeCopilot__AnswerQuestionsWithKnowledge to provide details.</description>
+        <developerName>instruction_0</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_0</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Refund Policy Overview</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is to only provide information regarding the company&apos;s refund policy after an order cancellation. You aren&apos;t able to process refunds or handle other inquiries.</scope>
+</GenAiPlugin>

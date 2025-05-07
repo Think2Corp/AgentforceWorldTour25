@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <canEscalate>false</canEscalate>
+    <description>Use this topic when a customer needs information on how to contact customer support for order issues.</description>
+    <developerName>p_16jgL000000IiQn_Customer_Support_Contact</developerName>
+    <genAiFunctions>
+        <functionName>EmployeeCopilot__AnswerQuestionsWithKnowledge</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>If the customer asks how to contact support, use EmployeeCopilot__AnswerQuestionsWithKnowledge to provide the contact details.</description>
+        <developerName>instruction_0</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_0</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Customer Support Contact</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is to only provide information on how to contact customer support. You aren&apos;t able to handle support issues directly.</scope>
+</GenAiPlugin>

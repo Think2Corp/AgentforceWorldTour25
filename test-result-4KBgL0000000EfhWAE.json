@@ -1,0 +1,60 @@
+{
+  "endTime": "2025-05-07T14:29:36Z",
+  "startTime": "2025-05-07T14:29:23Z",
+  "status": "COMPLETED",
+  "subjectName": "firsttest",
+  "testCases": [
+    {
+      "endTime": "2025-05-07T14:29:34Z",
+      "generatedData": {
+        "actionsSequence": "[]",
+        "outcome": "Could you please provide the client&#39;s name or order number so I can assist you better?",
+        "topic": "Off_Topic"
+      },
+      "inputs": {
+        "utterance": "Retrieve the last order of a client"
+      },
+      "startTime": "2025-05-07T14:29:23Z",
+      "status": "COMPLETED",
+      "testNumber": 1,
+      "testResults": [
+        {
+          "actualValue": "Off_Topic",
+          "endTime": "2025-05-07T14:29:36Z",
+          "errorCode": 0,
+          "expectedValue": "p_16jgL000000IiQn_Order_Status_Tracking",
+          "metricLabel": "topic_sequence_match",
+          "name": "topic_sequence_match",
+          "result": "FAILURE",
+          "score": 0,
+          "startTime": "2025-05-07T14:29:24Z",
+          "status": "COMPLETED"
+        },
+        {
+          "actualValue": "[]",
+          "endTime": "2025-05-07T14:29:36Z",
+          "errorCode": 0,
+          "expectedValue": "['SvcCopilotTmpl__IdentifyCustomerByEmail','SvcCopilotTmpl__GetOrderByOrderNumber']",
+          "metricLabel": "action_sequence_match",
+          "name": "action_sequence_match",
+          "result": "FAILURE",
+          "score": 0,
+          "startTime": "2025-05-07T14:29:24Z",
+          "status": "COMPLETED"
+        },
+        {
+          "actualValue": "Could you please provide the client's name or order number so I can assist you better?",
+          "endTime": "2025-05-07T14:29:36Z",
+          "errorCode": 0,
+          "expectedValue": "Getting the order info",
+          "metricLabel": "bot_response_rating",
+          "name": "bot_response_rating",
+          "result": "FAILURE",
+          "score": 0,
+          "startTime": "2025-05-07T14:29:24Z",
+          "status": "COMPLETED"
+        }
+      ]
+    }
+  ]
+}

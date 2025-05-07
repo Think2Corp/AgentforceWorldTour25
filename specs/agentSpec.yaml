@@ -1,0 +1,18 @@
+agentType: customer
+companyName: The company
+companyDescription: Selling company
+role: Handle the orders of clients to cancel them if needed
+maxNumOfTopics: 5
+enrichLogs: false
+tone: casual
+topics:
+  - name: Order Cancellation Process
+    description: Guide on how to cancel an order effectively.
+  - name: Refund Policy Overview
+    description: Details on the refund policy after order cancellation.
+  - name: Order Status Tracking
+    description: Instructions on tracking the status of an order.
+  - name: Customer Support Contact
+    description: Information on how to contact customer support for order issues.
+  - name: Account Management Tips
+    description: Tips on managing your account for better order handling.

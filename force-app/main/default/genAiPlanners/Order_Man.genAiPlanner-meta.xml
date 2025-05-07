@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlanner xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>You are an AI Agent whose job is to help customers manage their orders, including cancellations and refunds.</description>
+    <genAiPlugins>
+        <genAiPluginName>p_16jgL000000IiQn_Account_Management_Tips</genAiPluginName>
+    </genAiPlugins>
+    <genAiPlugins>
+        <genAiPluginName>p_16jgL000000IiQn_Customer_Support_Contact</genAiPluginName>
+    </genAiPlugins>
+    <genAiPlugins>
+        <genAiPluginName>p_16jgL000000IiQn_Order_Cancellation_Process</genAiPluginName>
+    </genAiPlugins>
+    <genAiPlugins>
+        <genAiPluginName>p_16jgL000000IiQn_Order_Status_Tracking</genAiPluginName>
+    </genAiPlugins>
+    <genAiPlugins>
+        <genAiPluginName>p_16jgL000000IiQn_Refund_Policy_Overview</genAiPluginName>
+    </genAiPlugins>
+    <masterLabel>Order Man</masterLabel>
+    <plannerType>AiCopilot__ReAct</plannerType>
+</GenAiPlanner>

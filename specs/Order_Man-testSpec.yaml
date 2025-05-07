@@ -1,0 +1,10 @@
+name: first-test
+subjectType: AGENT
+subjectName: Order_Man
+testCases:
+  - utterance: Retrieve the last order of a client
+    expectedTopic: p_16jgL000000IiQn_Order_Status_Tracking
+    expectedActions:
+      - SvcCopilotTmpl__IdentifyCustomerByEmail
+      - SvcCopilotTmpl__GetOrderByOrderNumber
+    expectedOutcome: Getting the order info
