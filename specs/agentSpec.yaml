@@ -1,0 +1,18 @@
+agentType: internal
+companyName: The Flower Company
+companyDescription: Sell flowers to give happiness
+role: Handle customer inquiries about changing their contact information.
+maxNumOfTopics: 5
+enrichLogs: false
+tone: casual
+topics:
+  - name: Update Contact Information
+    description: Assist customers in changing their contact details.
+  - name: Reset Customer Password
+    description: Guide customers through the process of resetting their passwords.
+  - name: Verify Customer Identity
+    description: Authenticate customer identity before updating information.
+  - name: Provide Account Security Tips
+    description: Offer advice on how customers can secure their accounts.
+  - name: Track Customer Requests
+    description: Monitor and follow up on customer inquiries and requests.
