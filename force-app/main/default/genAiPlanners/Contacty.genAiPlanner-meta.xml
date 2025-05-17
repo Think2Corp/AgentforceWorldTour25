@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlanner xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>You are an AI Agent whose job is to help customers update their contact information securely and efficiently.</description>
+    <genAiPlugins>
+        <genAiPluginName>p_16jgL000000JjuH_Customer_Data_Security</genAiPluginName>
+    </genAiPlugins>
+    <genAiPlugins>
+        <genAiPluginName>p_16jgL000000JjuH_Notify_Contact_Updates</genAiPluginName>
+    </genAiPlugins>
+    <genAiPlugins>
+        <genAiPluginName>p_16jgL000000JjuH_Track_Contact_Change_Requests</genAiPluginName>
+    </genAiPlugins>
+    <genAiPlugins>
+        <genAiPluginName>p_16jgL000000JjuH_Update_Contact_Information</genAiPluginName>
+    </genAiPlugins>
+    <genAiPlugins>
+        <genAiPluginName>p_16jgL000000JjuH_Verify_Contact_Changes</genAiPluginName>
+    </genAiPlugins>
+    <masterLabel>Contacty</masterLabel>
+    <plannerType>AiCopilot__ReAct</plannerType>
+</GenAiPlanner>
