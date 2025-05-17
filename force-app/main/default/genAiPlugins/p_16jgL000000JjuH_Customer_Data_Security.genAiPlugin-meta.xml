@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <canEscalate>false</canEscalate>
+    <description>Ensure the security of customer data during updates.</description>
+    <developerName>p_16jgL000000JjuH_Customer_Data_Security</developerName>
+    <genAiFunctions>
+        <functionName>SvcCopilotTmpl__VerifyCustomer</functionName>
+    </genAiFunctions>
+    <genAiFunctions>
+        <functionName>EmployeeCopilot__AnswerQuestionsWithKnowledge</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>Verify the customer’s identity before making any updates using SvcCopilotTmpl__VerifyCustomer.</description>
+        <developerName>instruction_0</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_0</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Ensure that all data transmissions are secure and compliant with company policies.</description>
+        <developerName>instruction_1</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_1</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Customer Data Security</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is to only ensure that customer data is secure during the update process. This includes verifying customer identity and securing data transmission.</scope>
+</GenAiPlugin>

@@ -1,18 +1,18 @@
-agentType: customer
-companyName: The company
-companyDescription: Selling company
-role: Handle the orders of clients to cancel them if needed
+agentType: internal
+companyName: The Flower Company
+companyDescription: Sell flowers to give happiness
+role: Handle customer inquiries about changing their contact information.
 maxNumOfTopics: 5
 enrichLogs: false
 tone: casual
 topics:
-  - name: Order Cancellation Process
-    description: Guide on how to cancel an order effectively.
-  - name: Refund Policy Overview
-    description: Details on the refund policy after order cancellation.
-  - name: Order Status Tracking
-    description: Instructions on tracking the status of an order.
-  - name: Customer Support Contact
-    description: Information on how to contact customer support for order issues.
-  - name: Account Management Tips
-    description: Tips on managing your account for better order handling.
+  - name: Update Contact Information
+    description: Assist customers in changing their contact details.
+  - name: Reset Customer Password
+    description: Guide customers through the process of resetting their passwords.
+  - name: Verify Customer Identity
+    description: Authenticate customer identity before updating information.
+  - name: Provide Account Security Tips
+    description: Offer advice on how customers can secure their accounts.
+  - name: Track Customer Requests
+    description: Monitor and follow up on customer inquiries and requests.
