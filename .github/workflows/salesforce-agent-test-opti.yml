@@ -1,4 +1,10 @@
-name: Salesforce Agent Test (Matrix)
+# This workflow is an example used during the Agentforce World Tour Paris 2025
+# Agentforce CLI : Créer un agent depuis votre terminal
+# By @nabondance
+
+name: Salesforce Agent Test (Optimized)
+# This workflow runs Salesforce Agent tests in parallel and aggregates the results.
+# It uses a matrix strategy to run each test in its own job, allowing for faster execution.
 
 on:
   push:

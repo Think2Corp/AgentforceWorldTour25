@@ -1,4 +1,11 @@
+# This workflow is an example used during the Agentforce World Tour Paris 2025
+# Agentforce CLI : Créer un agent depuis votre terminal
+# By @nabondance
+
 name: Salesforce Agent Test
+# This workflow runs Salesforce Agent tests and aggregates the results.
+# It uses a single job to run all tests sequentially, which is simpler but may take longer than a matrix strategy.
+# It is split into several steps for better readability and understanding.
 
 on:
   push:
