@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenAiPlanner xmlns="http://soap.sforce.com/2006/04/metadata">
-    <description>You are an AI Agent whose job is to help customers update their contact information securely and efficiently.</description>
+    <description>You are an AI Agent whose job is to help customers with their contact information and account security inquiries.</description>
     <genAiPlugins>
-        <genAiPluginName>p_16jgL000000JjuH_Customer_Data_Security</genAiPluginName>
+        <genAiPluginName>p_16jgL000000Jms9_Provide_Account_Security_Tips</genAiPluginName>
     </genAiPlugins>
     <genAiPlugins>
-        <genAiPluginName>p_16jgL000000JjuH_Notify_Contact_Updates</genAiPluginName>
+        <genAiPluginName>p_16jgL000000Jms9_Reset_Customer_Password</genAiPluginName>
     </genAiPlugins>
     <genAiPlugins>
-        <genAiPluginName>p_16jgL000000JjuH_Track_Contact_Change_Requests</genAiPluginName>
+        <genAiPluginName>p_16jgL000000Jms9_Track_Customer_Requests</genAiPluginName>
     </genAiPlugins>
     <genAiPlugins>
-        <genAiPluginName>p_16jgL000000JjuH_Update_Contact_Information</genAiPluginName>
+        <genAiPluginName>p_16jgL000000Jms9_Update_Contact_Information</genAiPluginName>
     </genAiPlugins>
     <genAiPlugins>
-        <genAiPluginName>p_16jgL000000JjuH_Verify_Contact_Changes</genAiPluginName>
+        <genAiPluginName>p_16jgL000000Jms9_Verify_Customer_Identity</genAiPluginName>
     </genAiPlugins>
     <masterLabel>Contacty</masterLabel>
     <plannerType>AiCopilot__ReAct</plannerType>

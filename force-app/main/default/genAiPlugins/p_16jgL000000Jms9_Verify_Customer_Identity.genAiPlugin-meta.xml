@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <canEscalate>false</canEscalate>
+    <description>Authenticate customer identity before updating information.</description>
+    <developerName>p_16jgL000000Jms9_Verify_Customer_Identity</developerName>
+    <genAiFunctions>
+        <functionName>SvcCopilotTmpl__VerifyCustomer</functionName>
+    </genAiFunctions>
+    <genAiFunctions>
+        <functionName>EmployeeCopilot__AnswerQuestionsWithKnowledge</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>If the customer needs to verify their identity, use SvcCopilotTmpl__VerifyCustomer.</description>
+        <developerName>instruction_0</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_0</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Verify Customer Identity</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is to only verify whether the verification code entered by the user matches the code sent to the user’s email address. You aren&apos;t able to update customer information without successful verification.</scope>
+</GenAiPlugin>
