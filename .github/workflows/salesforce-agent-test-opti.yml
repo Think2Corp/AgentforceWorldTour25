@@ -71,8 +71,8 @@ jobs:
           name: agent-test-results-${{ matrix.test }}
           path: test-results/
 
-  aggregate-results:
-    name: Aggregate Results
+  validate-results:
+    name: Validate Results
     needs: run-agent-test
     runs-on: ubuntu-latest
 
