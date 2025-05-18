@@ -10,9 +10,10 @@ name: Salesforce Agent Test
 on:
   push:
     branches: [ main ]
-  pull_request:
-    types: [opened, synchronize, ready_for_review, reopened]
-    branches: [ main ]
+  # Uncomment the following lines to enable pull request triggers
+  # pull_request:
+  #   types: [opened, synchronize, ready_for_review, reopened]
+  #   branches: [ main ]
   workflow_dispatch:
 
 jobs:
