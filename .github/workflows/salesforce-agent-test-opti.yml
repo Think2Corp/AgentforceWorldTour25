@@ -108,10 +108,10 @@ jobs:
           echo "=================================="
           echo "          Agent Test Summary       "
           echo "=================================="
-          echo "Total Tests:    ${{ steps.summary.outputs.TOTAL }}"
+          echo "Total Tests :    ${{ steps.summary.outputs.TOTAL }}"
           echo "Tests Passed:   ${{ steps.summary.outputs.PASSED }}"
           echo "Tests Failed:   ${{ steps.summary.outputs.FAILED }}"
-          echo "Pass %:         ${{ steps.summary.outputs.PERCENT }}%"
+          echo "Pass        :   ${{ steps.summary.outputs.PERCENT }}%"
           echo "=================================="
 
       - name: Enforce pass threshold
