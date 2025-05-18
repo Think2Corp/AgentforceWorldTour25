@@ -117,5 +117,5 @@ jobs:
       - name: Enforce pass threshold
         if: ${{ steps.summary.outputs.PERCENT < 75 }}
         run: |
-          echo "❌ Agent tests failed threshold. Only ${{ steps.summary.outputs.PERCENT }}% passed."
+          echo "❌ Agent tests failed threshold (75%). Only ${{ steps.summary.outputs.PERCENT }}% passed."
           exit 1
