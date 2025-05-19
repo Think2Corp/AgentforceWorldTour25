@@ -1,0 +1,121 @@
+# This workflow is an example used during the Agentforce World Tour Paris 2025
+# Agentforce CLI : Créer un agent depuis votre terminal
+# By @nabondance
+
+name: Salesforce Agent Test (Optimized)
+# This workflow runs Salesforce Agent tests in parallel and aggregates the results.
+# It uses a matrix strategy to run each test in its own job, allowing for faster execution.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, ready_for_review, reopened]
+  workflow_dispatch:
+
+jobs:
+  list-tests:
+    name: List Agent Tests
+    runs-on: ubuntu-latest
+    container: salesforce/cli:latest-slim
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate Salesforce Org
+        run: |
+          echo "${{ secrets.ORG_SFDX_AUTH_URL }}" > ./authfile
+          sf org login sfdx-url --sfdxurlfile=authfile -a sf_org
+
+      - name: List agent tests and set matrix
+        id: set-matrix
+        run: |
+          TESTS=$(sf agent test list --target-org=sf_org --json | jq -c '[.result[].fullName]')
+          if [ "$TESTS" == "[]" ]; then
+            echo "No tests found. Failing early."
+            exit 1
+          fi
+          echo "matrix={\"test\":$TESTS}" >> "$GITHUB_OUTPUT"
+
+  run-agent-test:
+    name: Run Agent Test - ${{ matrix.test }}
+    needs: list-tests
+    runs-on: ubuntu-latest
+    container: salesforce/cli:latest-slim
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.list-tests.outputs.matrix) }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate Salesforce Org
+        run: |
+          echo "${{ secrets.ORG_SFDX_AUTH_URL }}" > ./authfile
+          sf org login sfdx-url --sfdxurlfile=authfile -a sf_org
+
+      - name: Run test and get result
+        id: test
+        run: |
+          mkdir -p test-results
+          RUN_ID=$(sf agent test run --target-org=sf_org --api-name="${{ matrix.test }}" --wait 10 --json | jq -r '.result.runId')
+          RESULT=$(sf agent test results --target-org=sf_org --job-id="$RUN_ID" --json)
+          echo "$RESULT" > "test-results/${{ matrix.test }}.json"
+
+      - name: Upload individual result
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-test-results-${{ matrix.test }}
+          path: test-results/
+
+  validate-results:
+    name: Validate Results
+    needs: run-agent-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download all test results
+        uses: actions/download-artifact@v4
+        with:
+          path: all-results
+
+      - name: Summarize test outcomes
+        id: summary
+        run: |
+          total=0
+          passed=0
+          failed=0
+
+          for file in all-results/**/*.json; do
+            p=$(jq '[.result.testCases[] | .testResults[] | select(.result == "PASS")] | length' "$file")
+            f=$(jq '[.result.testCases[] | .testResults[] | select(.result == "FAILURE")] | length' "$file")
+            total=$((total + p + f))
+            passed=$((passed + p))
+            failed=$((failed + f))
+          done
+
+          percentage=$((passed * 100 / total))
+          echo "TOTAL=$total" >> "$GITHUB_OUTPUT"
+          echo "PASSED=$passed" >> "$GITHUB_OUTPUT"
+          echo "FAILED=$failed" >> "$GITHUB_OUTPUT"
+          echo "PERCENT=$percentage" >> "$GITHUB_OUTPUT"
+
+      - name: Display summary
+        run: |
+          echo "=================================="
+          echo "          Agent Test Summary       "
+          echo "=================================="
+          echo "Total Tests :    ${{ steps.summary.outputs.TOTAL }}"
+          echo "Tests Passed:   ${{ steps.summary.outputs.PASSED }}"
+          echo "Tests Failed:   ${{ steps.summary.outputs.FAILED }}"
+          echo "Pass        :   ${{ steps.summary.outputs.PERCENT }}%"
+          echo "=================================="
+
+      - name: Enforce pass threshold
+        if: ${{ steps.summary.outputs.PERCENT < 75 }}
+        run: |
+          echo "❌ Agent tests failed threshold (75%). Only ${{ steps.summary.outputs.PERCENT }}% passed."
+          exit 1

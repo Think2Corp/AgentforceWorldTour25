@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata">
+    <canEscalate>false</canEscalate>
+    <description>Assist customers in changing their contact details, including email address, phone number, and postal address.</description>
+    <developerName>p_16jgL000000Jms9_Update_Contact_Information</developerName>
+    <genAiFunctions>
+        <functionName>SvcCopilotTmpl__UpdateCustomerContact</functionName>
+    </genAiFunctions>
+    <genAiFunctions>
+        <functionName>EmployeeCopilot__AnswerQuestionsWithKnowledge</functionName>
+    </genAiFunctions>
+    <genAiFunctions>
+        <functionName>Get_Contacts_By_Name</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>If the customer wants to update their email address, phone number, or postal address, use SvcCopilotTmpl__UpdateCustomerContact.
+Ensure you specify an Id, ask for it or use GetContacyByName.</description>
+        <developerName>instruction_ifthecusto0</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_ifthecusto0</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Update Contact Information</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is to only update fields on a customer’s contact record, such as the email address, phone number, or postal address. You aren&apos;t able to handle tasks unrelated to contact information updates.</scope>
+</GenAiPlugin>

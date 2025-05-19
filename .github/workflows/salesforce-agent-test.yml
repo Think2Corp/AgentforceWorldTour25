@@ -1,0 +1,139 @@
+# This workflow is an example used during the Agentforce World Tour Paris 2025
+# Agentforce CLI : Créer un agent depuis votre terminal
+# By @nabondance
+
+name: Salesforce Agent Test
+# This workflow runs Salesforce Agent tests and aggregates the results.
+# It uses a single job to run all tests sequentially, which is simpler but may take longer than a matrix strategy.
+# It is split into several steps for better readability and understanding.
+
+on:
+  push:
+    branches: [ main ]
+  # Uncomment the following lines to enable pull request triggers
+  # pull_request:
+  #   types: [opened, synchronize, ready_for_review, reopened]
+  #   branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  salesforce-agent:
+    runs-on: ubuntu-latest
+    container: salesforce/cli:latest-slim
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 'Install agent plugin'
+        run: sf plugins install @salesforce/plugin-agent
+
+      - name: 'Authenticate sf org'
+        run: |
+         echo "${{ secrets.ORG_SFDX_AUTH_URL }}" > ./authfile
+         sf org login sfdx-url --sfdxurlfile=authfile -a sf_org
+
+      - name: 'List Agent tests'
+        id: list-tests
+        run: |
+          echo "TESTS_LIST=$(sf agent test list --target-org=sf_org --json | jq -c '[.result[].fullName]')" >> $GITHUB_OUTPUT
+
+      - name: 'Abort if no tests found'
+        if: ${{ steps.list-tests.outputs.TESTS_LIST == '[]' }}
+        run: |
+          echo "No tests to run in the org."
+          exit 0
+
+      - name: 'Run tests and collect runIds'
+        id: run-tests
+        shell: bash
+        run: |
+          TESTS_JSON='${{ steps.list-tests.outputs.TESTS_LIST }}'
+          run_ids=""
+          while read -r test; do
+            if [ ! -z "$test" ]; then
+              run_id=$(sf agent test run --target-org=sf_org --api-name="$test" --json | jq -r '.result.runId')
+              if [ -z "$run_ids" ]; then
+                run_ids="[\"$run_id\""
+              else
+                run_ids="$run_ids,\"$run_id\""
+              fi
+            fi
+          done < <(echo "$TESTS_JSON" | jq -r '.[]')
+          run_ids="$run_ids]"
+          echo "RUN_IDS=$run_ids" >> $GITHUB_OUTPUT
+
+      - name: 'Display runIds'
+        run: |
+          echo "${{ steps.run-tests.outputs.RUN_IDS }}"
+
+      - name: 'Wait for tests to finish'
+        id: wait-for-tests
+        shell: bash
+        run: |
+          run_ids='${{ steps.run-tests.outputs.RUN_IDS }}'
+          test_results=()
+          total_passed=0
+          total_failed=0
+          total_tests=0
+          mkdir -p ./test-results
+
+          for run_id in $(echo "$run_ids" | jq -r '.[]'); do
+            while true; do
+              result=$(sf agent test results --target-org=sf_org --job-id="$run_id" --json)
+              status=$(echo "$result" | jq -r '.result.status')
+              if [ "$status" == "COMPLETED" ]; then
+                # Count test results for this run
+                passed=$(echo "$result" | jq -r '[.result.testCases[] | .testResults[] | select(.result == "PASS")] | length')
+                failed=$(echo "$result" | jq -r '[.result.testCases[] | .testResults[] | select(.result == "FAILURE")] | length')
+
+                # Add to totals
+                total_passed=$((total_passed + passed))
+                total_failed=$((total_failed + failed))
+
+                # Add result to array
+                test_results+=("$(echo "$result" | jq -c '.')")
+                echo "$result" > "./test-results/${run_id}.json"
+
+                break
+              fi
+              sleep 10
+            done
+          done
+
+          # Calculate total tests
+          total_tests=$((total_passed + total_failed))
+
+          # Combine all results into a JSON array
+          json_array=$(printf '%s,' "${test_results[@]}" | sed 's/,$//')
+          echo "TEST_RESULTS=[${json_array}]" >> "$GITHUB_OUTPUT"
+
+          # Also save the statistics as outputs
+          echo "TOTAL_TESTS=$total_tests" >> "$GITHUB_OUTPUT"
+          echo "TOTAL_PASSED=$total_passed" >> "$GITHUB_OUTPUT"
+          echo "TOTAL_FAILED=$total_failed" >> "$GITHUB_OUTPUT"
+          echo "PERCENTAGE_PASSED=$((total_passed * 100 / total_tests))" >> "$GITHUB_OUTPUT"
+
+      - name: 'Display test results'
+        run: |
+          echo "============================================"
+          echo "            Test Results Summary            "
+          echo "============================================"
+          echo "Total Tests Run: ${{ steps.wait-for-tests.outputs.TOTAL_TESTS }}"
+          echo "Tests Passed:    ${{ steps.wait-for-tests.outputs.TOTAL_PASSED }}"
+          echo "Tests Failed:    ${{ steps.wait-for-tests.outputs.TOTAL_FAILED }}"
+          echo "Percentage Passed: ${{ steps.wait-for-tests.outputs.PERCENTAGE_PASSED }}%"
+          echo "============================================"
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-test-results
+          path: ./test-results/
+
+      - name: 'Check for passing threshold'
+        if: ${{ steps.wait-for-tests.outputs.PERCENTAGE_PASSED < '75' }}
+        run: |
+          echo "Test run failed. Percentage passed: ${{ steps.wait-for-tests.outputs.PERCENTAGE_PASSED }}%"
+          echo "Failing the job as the percentage passed is below the threshold."
+          exit 1
