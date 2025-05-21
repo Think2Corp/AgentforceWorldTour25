@@ -4,4 +4,4 @@ Ce repo a été créé pour la présentation lors du __Agentforce World Tour Par
 
 Vous pouvez retrouver les [slides de la présentation ici](https://speakerdeck.com/nabondance/agentforce-world-tour-25-agentforce-cli-2).
 
-Pour suivre les évolution de l'agent cli c'est sur le [repo officiel](https://github.com/salesforcecli/plugin-agent).
+Pour suivre les évolutions de l'agent cli c'est sur le [repo officiel](https://github.com/salesforcecli/plugin-agent).
