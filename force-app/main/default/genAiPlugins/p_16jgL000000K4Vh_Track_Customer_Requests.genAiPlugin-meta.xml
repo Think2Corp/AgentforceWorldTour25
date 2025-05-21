@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <canEscalate>false</canEscalate>
+    <description>Monitor and follow up on customer inquiries and requests.</description>
+    <developerName>p_16jgL000000K4Vh_Track_Customer_Requests</developerName>
+    <genAiFunctions>
+        <functionName>SvcCopilotTmpl__GetCaseByCaseNumber</functionName>
+    </genAiFunctions>
+    <genAiFunctions>
+        <functionName>EmployeeCopilot__AnswerQuestionsWithKnowledge</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>If the customer inquires about the status of their request, use SvcCopilotTmpl__GetCaseByCaseNumber.</description>
+        <developerName>instruction_0</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_0</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Track Customer Requests</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is to only track and provide updates on customer inquiries and requests. You aren&apos;t able to resolve the inquiries directly.</scope>
+</GenAiPlugin>
