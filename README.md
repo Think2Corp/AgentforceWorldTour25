@@ -6,3 +6,7 @@ Ce repo a été créé pour la présentation lors du __Agentforce World Tour Par
 
 
 Pour suivre les évolutions de l'agent cli c'est sur le [repo officiel](https://github.com/salesforcecli/plugin-agent).
+
+Pour discuter et creuser ensemble des sujets Agentforce, [contactez moi](https://www.linkedin.com/in/nabondance/).
+
+🫶
